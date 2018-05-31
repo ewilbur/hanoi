@@ -40,11 +40,19 @@ void Hanoi::prettyPrint() {
   }
 }
 
+/* This is not the most efficient algorithm as it is not memoized
+ * and therefore replicates many of the same operations. However,
+ * it is by far the coolest way of doing this. It will find the
+ * optimal solution if the number of towers you have is 3, but
+ * the solution when numTowers > 3 is not optimal (however it still
+ * gives a pretty good solution */
 void Hanoi::move(unsigned int numTiles, Tower &source, Tower &dest) {
   if (numTiles == 1) {
+    // Only moving one tile
     if (source.moveTo(dest) == ILLEGAL) {
+      // Try moving it
       cout << "error" << endl;
-      exit(0);
+      exit(1);
     }
     prettyPrint();
     cout << endl;
@@ -52,9 +60,13 @@ void Hanoi::move(unsigned int numTiles, Tower &source, Tower &dest) {
     return;
   } else {
 
+    // Otherwise find an open tile to use
     Tower *spare = spareTower(source, dest);
+    // Move the top n - 1 tiles to it
     move(numTiles - 1, source, *spare);
+    // Then move the bottom tile to the destination
     move(1, source, dest);
+    // Move the tiles on the spare to the destination
     move(numTiles - 1, *spare, dest);
   }
 }
@@ -73,6 +85,5 @@ Tower *Hanoi::spareTower(Tower &source, Tower &dest) {
     if (towers[i] > *maybeSpare && towers[i] != source && towers[i] != dest) {
       maybeSpare = &towers[i];
     }
-
   return maybeSpare;
 }

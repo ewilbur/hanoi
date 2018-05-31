@@ -32,8 +32,6 @@ const vector<string> Tower::get_towerVectorString() {
   return towerVectorString;
 }
 
-
-
 Tile Tower::top() const {
   return tower.back();
 }
@@ -76,12 +74,6 @@ void Tower::makePrettyString() {
     prettyStringRow(towerVectorString.at(i), tower[i]);
   for (; i < capacity; ++i) 
     prettyStringRow(towerVectorString.at(i), 0);
-}
-
-void Tower::prettyPrint() {
-  makePrettyString();
-  for (int i = towerVectorString.size() - 1; i >= 0; --i)
-    cout << towerVectorString.at(i) << endl;
 }
 
 bool Tower::partiallyComplete() {
