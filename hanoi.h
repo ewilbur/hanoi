@@ -12,7 +12,7 @@ class Hanoi {
     Tile numTiles;
 
     void move(unsigned int, Tower&, Tower&);
-    unsigned int openTower(Tile);
+    Tower *spareTower(Tower&, Tower&);
 
   public:
     Hanoi(Tile); // default 3 towers

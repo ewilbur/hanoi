@@ -28,10 +28,20 @@ class Tower {
 
     void fill();
     void clear();
-    Tile top();
+    Tile top() const;
     TileMove moveTo(Tower&);
     const std::vector<std::string> get_towerVectorString();
     void prettyPrint(); // TODO remove
+
+    bool partiallyComplete();
+
+    bool operator==(const Tower&) const;
+    bool operator!=(const Tower&) const;
+    bool operator>=(const Tower&) const;
+    bool operator<=(const Tower&) const;
+    bool operator<(const Tower&) const;
+    bool operator>(const Tower&) const;
+    Tile operator[](int) const;
 };
 
 #endif // TOWER_H_

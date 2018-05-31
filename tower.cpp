@@ -34,7 +34,7 @@ const vector<string> Tower::get_towerVectorString() {
 
 
 
-Tile Tower::top() {
+Tile Tower::top() const {
   return tower.back();
 }
 
@@ -84,4 +84,38 @@ void Tower::prettyPrint() {
     cout << towerVectorString.at(i) << endl;
 }
 
+bool Tower::partiallyComplete() {
+  Tile j = capacity;
+  for (int i = 0; i < tower.size(); ++i, --j)
+    if (j != tower[i])
+      return false;
+  return true;
+}
 
+bool Tower::operator==(const Tower& tower) const {
+  return this == &tower;
+}
+
+bool Tower::operator!=(const Tower &tower) const {
+  return this != &tower;
+}
+
+bool Tower::operator>=(const Tower &tower) const {
+  return this->top() >= tower.top();
+}
+
+bool Tower::operator<=(const Tower &tower) const {
+  return tower >= *this;
+}
+
+bool Tower::operator>(const Tower &tower) const {
+  return !(*this <= tower);
+}
+
+bool Tower::operator<(const Tower &tower) const {
+  return (tower > *this);
+}
+
+Tile Tower::operator[](int i) const {
+  return (i >= tower.size() || i >= capacity) ? capacity : tower[tower.size() - i];
+}
